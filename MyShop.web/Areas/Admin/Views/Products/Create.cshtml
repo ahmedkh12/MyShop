@@ -1,0 +1,59 @@
+﻿@model ProductVM
+@{
+    ViewBag.cardtitle = "Create Product";
+    Layout = "_Layout";
+}
+
+
+
+<div class="row">
+    <div class="col-md-4 m-md-3">
+        <form asp-controller="Products" asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="product.name" class="control-label"></label>
+                <input asp-for="product.name" class="form-control" />
+                <span asp-validation-for="product.name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="product.description" class="control-label"></label>
+                <input asp-for="product.description" class="form-control" />
+                <span asp-validation-for="product.description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="product.price" class="control-label"></label>
+                <input asp-for="product.price" class="form-control" type="number" />
+                <span asp-validation-for="product.price" class="text-danger"></span>
+            </div>
+
+             <div class="form-group">
+                <label asp-for="product.img" class="control-label"></label>
+                <input name="file" id="uploaded_image" class="form-control" type="file" />
+            
+            </div>
+
+             <div class="form-group">
+                <label asp-for="product.categoryId" class="control-label"></label>
+                <select asp-for="product.categoryId" asp-items="Model.CategoryList" class="form-control">
+                    <option class="form-control" disabled selected>----------Select Category-------</option>
+                </select>
+                
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
